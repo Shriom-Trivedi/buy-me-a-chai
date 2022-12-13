@@ -54,13 +54,13 @@ export default function Home({ donations }: { donations: Array<Record> }) {
       </Head>
 
       <main className='flex md:flex-row flex-col max-w-6xl h-full m-auto'>
-        <div className=' flex-[3]'>
-          <div className='mt-16'>
+        <div className='flex-[3]'>
+          <div className='mt-16 m-3 md:m-0'>
             <h2 className='mb-8'>Previous donations</h2>
             {donations.map((donation) => {
               const { amount, name, message } = donation.fields;
               return (
-                <div key={donation.id} className='p-4 border mb-3 w-[80%]'>
+                <div key={donation.id} className='p-4 border mb-3 md:w-[80%]'>
                   {name} donated ₹{amount}
                   <br />
                   {message}
@@ -98,7 +98,7 @@ export default function Home({ donations }: { donations: Array<Record> }) {
                   type='number'
                   name='price'
                   id='price'
-                  className=' py-2 px-2 w-[8.3rem] bg-[#f5f5f6] rounded border-[1.5px] border-[#e4e3e3] text-[#696e79] focus:bg-[#fdfdfd] focus:border-blue-500 outline-none'
+                  className=' py-2 px-2 w-[4rem] md:w-[8.3rem] bg-[#f5f5f6] rounded border-[1.5px] border-[#e4e3e3] text-[#696e79] focus:bg-[#fdfdfd] focus:border-blue-500 outline-none'
                   min={1}
                   value={quantity}
                   onChange={(e) => setQuantity(parseFloat(e.target.value))}
