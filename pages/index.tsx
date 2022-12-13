@@ -55,7 +55,7 @@ export default function Home({ donations }: { donations: Array<Record> }) {
 
       <main className='flex md:flex-row flex-col max-w-6xl h-full m-auto'>
         <div className='flex-[3]'>
-          <div className='mt-16 m-3 md:m-0'>
+          <div className='mt-16 m-3 md:m-0 md:mt-16'>
             <h2 className='mb-8'>Previous donations</h2>
             {donations.map((donation) => {
               const { amount, name, message } = donation.fields;
