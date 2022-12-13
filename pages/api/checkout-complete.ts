@@ -94,7 +94,6 @@ export default async function handler(
       }
     ).amount_total / 100;
 
-  console.log({ ...metadata, amount });
   await insertToAirTable({
     ...metadata,
     amount,
