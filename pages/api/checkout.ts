@@ -21,7 +21,6 @@ export default async function handler(
   const message = req.body.message || '';
 
   const full_amount = DONATION_IN_RUPEES;
-  console.log({ full_amount, quantity, DONATION_IN_RUPEES });
   try {
     const session = await stripe.checkout.sessions.create({
       metadata: {
