@@ -65,5 +65,5 @@ export default async function handler(
 
   const data = (await response.json()) as AirtableRecord;
 
-  return res.status(200).json({ message: 'Success' });
+  return res.status(200).json(data.records);
 }

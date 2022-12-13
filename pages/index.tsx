@@ -1,10 +1,12 @@
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { DONATION_IN_RUPEES, MAX_DONATION_IN_RUPEES } from '../config';
+import { Record } from '../types';
 
-export default function Home() {
+export default function Home({ donations }: { donations: Array<Record> }) {
   const router = useRouter();
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(10);
@@ -54,7 +56,17 @@ export default function Home() {
       <main className='flex md:flex-row flex-col max-w-6xl h-full m-auto'>
         <div className=' flex-[3]'>
           <div className='mt-16'>
-            <h2>Previous donations</h2>
+            <h2 className='mb-8'>Previous donations</h2>
+            {donations.map((donation) => {
+              const { amount, name, message } = donation.fields;
+              return (
+                <div key={donation.id} className='p-4 border mb-3 w-[80%]'>
+                  {name} donated ₹{amount}
+                  <br />
+                  {message}
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className='flex-[2] p-3 md:p-0'>
@@ -88,7 +100,6 @@ export default function Home() {
                   id='price'
                   className=' py-2 px-2 w-[8.3rem] bg-[#f5f5f6] rounded border-[1.5px] border-[#e4e3e3] text-[#696e79] focus:bg-[#fdfdfd] focus:border-blue-500 outline-none'
                   min={1}
-                  max={MAX_DONATION_IN_RUPEES / DONATION_IN_RUPEES}
                   value={quantity}
                   onChange={(e) => setQuantity(parseFloat(e.target.value))}
                 />
@@ -142,3 +153,17 @@ export default function Home() {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const protocol = context.req.headers['x-forward-proto'] || 'http';
+  const response = await fetch(
+    `${protocol}://${context.req.headers.host}/api/donations`
+  );
+
+  const donations = await response.json();
+  return {
+    props: {
+      donations,
+    },
+  };
+};
