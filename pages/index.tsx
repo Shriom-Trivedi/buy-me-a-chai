@@ -7,7 +7,6 @@ import { DONATION_IN_RUPEES, MAX_DONATION_IN_RUPEES } from '../config';
 import { Record } from '../types';
 
 export default function Home({ donations }: { donations: Array<Record> }) {
-  // console.log({ donations });
   const router = useRouter();
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(10);
@@ -32,8 +31,6 @@ export default function Home({ donations }: { donations: Array<Record> }) {
 
     const res = await response.json();
 
-    console.log(res);
-
     if (!res.url) {
       setError(res.error);
       return;
@@ -56,22 +53,30 @@ export default function Home({ donations }: { donations: Array<Record> }) {
 
       <main className='flex md:flex-row flex-col max-w-6xl h-full m-auto'>
         <div className='flex-[3]'>
-          <div className='mt-16 m-3 md:m-0 md:mt-16'>
-            <h2 className='mb-8'>Previous donations</h2>
+          <div className='mt-16 m-3 md:m-0 md:mt-12'>
+            <h2 className='mb-8 text-2xl font-semibold'>Previous donations</h2>
             {donations.map((donation) => {
               const { amount, name, message } = donation.fields;
               return (
-                <div key={donation.id} className='p-4 border mb-3 md:w-[80%]'>
-                  {name} donated ₹{amount}
-                  <br />
-                  {message}
+                <div
+                  key={donation.id}
+                  className='p-4 bg-[#37afff0d] border-[#37a8ff40] border rounded mb-3 md:w-[80%] hover:opacity-80'
+                >
+                  <span className='font-medium'>{name}</span>
+                  <span> donated </span>
+                  <span className=' text-green-500'>₹{amount}</span>
+                  <div className='mt-4'>
+                    <span className='italic font-mono text-gray-500 tracking-tighter'>
+                      "{message}"
+                    </span>
+                  </div>
                 </div>
               );
             })}
           </div>
         </div>
         <div className='flex-[2] p-3 md:p-0'>
-          <div className='w-full flex items-center mt-16'>
+          <div className='w-full flex items-center mt-[6.9rem]'>
             <div className='w-full border border-[#37a8ff40] rounded-lg px-5 py-7'>
               <h1 className=' text-3xl my-6 font-semibold'>Buy me a chai ☕</h1>
               <div className='flex items-center w-full mb-3 py-5 rounded border border-[#37a8ff40] bg-[#37afff0d]'>
