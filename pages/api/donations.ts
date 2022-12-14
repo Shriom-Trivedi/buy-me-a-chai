@@ -15,36 +15,6 @@ const stripe = new Stripe(STRIPE_API_KEY, {
   apiVersion: '2022-08-01',
 });
 
-const insertToAirTable = async ({
-  name,
-  message,
-  amount,
-}: {
-  name: string;
-  message: string;
-  amount: number;
-}) => {
-  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/donations`;
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${AIRTABLE_BEARER_TOKEN}`,
-    },
-    body: JSON.stringify({
-      records: [
-        {
-          fields: {
-            name,
-            message,
-            amount,
-          },
-        },
-      ],
-    }),
-  });
-};
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -53,7 +23,7 @@ export default async function handler(
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/donations?maxRecords=3&view=Grid%20view`;
+  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/donations?maxRecords=100&view=Grid%20view`;
 
   const response = await fetch(url, {
     method: 'GET',

@@ -162,7 +162,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   );
 
   const donations = await response.json();
-  console.log(donations)
   return {
     props: {
       donations,
