@@ -66,8 +66,8 @@ export default function Home({ donations }: { donations: Array<Record> }) {
                   <span> donated </span>
                   <span className=' text-green-500'>₹{amount}</span>
                   <div className='mt-4'>
-                    <span className='italic font-mono text-gray-500 tracking-tighter'>
-                      "{message}"
+                    <span className='italic font-mono text-gray-500 tracking-[-0.04rem]'>
+                      {`"${message}"`}
                     </span>
                   </div>
                 </div>
