@@ -7,6 +7,7 @@ import { DONATION_IN_RUPEES, MAX_DONATION_IN_RUPEES } from '../config';
 import { Record } from '../types';
 
 export default function Home({ donations }: { donations: Array<Record> }) {
+  // console.log({ donations });
   const router = useRouter();
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(10);
@@ -155,12 +156,13 @@ export default function Home({ donations }: { donations: Array<Record> }) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const protocol = context.req.headers['x-forward-proto'] || 'http';
+  const protocol = context.req.headers['x-forwarded-proto'] || 'http';
   const response = await fetch(
     `${protocol}://${context.req.headers.host}/api/donations`
   );
 
   const donations = await response.json();
+  console.log(donations)
   return {
     props: {
       donations,
