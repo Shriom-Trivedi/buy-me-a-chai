@@ -52,7 +52,7 @@ export default function Home({ donations }: { donations: Array<Record> }) {
       </Head>
 
       <main className='flex md:flex-row flex-col max-w-6xl h-full m-auto'>
-        <div className='flex-[3]'>
+        <div className='flex-[3] overflow-y-scroll scrollbar-hide'>
           <div className='mt-16 m-3 md:m-0 md:mt-12'>
             <h2 className='mb-8 text-2xl font-semibold'>Previous donations</h2>
             {donations.map((donation) => {
