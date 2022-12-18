@@ -60,7 +60,7 @@ export default function Home({ donations }: { donations: Array<Record> }) {
               return (
                 <div
                   key={donation.id}
-                  className='p-4 bg-[#37afff0d] border-[#37a8ff40] border rounded mb-3 md:w-[80%] hover:opacity-80'
+                  className='p-4 bg-[#37afff0d] border-[#37a8ff40] border rounded mb-3 md:w-[80%] hover:opacity-80 cursor-text'
                 >
                   <span className='font-medium'>{name}</span>
                   <span> donated </span>
